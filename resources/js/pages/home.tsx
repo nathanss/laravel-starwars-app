@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { ResultsList } from '@/components/ResultsList';
 
 
 
@@ -14,16 +15,21 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchType, setSearchType] = useState('people');
 
+    const normalizeResults = async (res: Response) => {
+        const json = await res.json();
+        return json.result || json.results;
+    }
+
     const { data: peopleData, isLoading: isPeopleLoading } = useQuery({
         enabled: searchType === 'people' && searchTerm.length > 0,
         queryKey: ['people', searchTerm],
-        queryFn: () => fetch(`/api/star-wars/people?name=${encodeURIComponent(searchTerm)}`).then(res => res.json()).then(data => data.result || data.results)
+        queryFn: () => fetch(`/api/star-wars/people?name=${encodeURIComponent(searchTerm)}`).then(normalizeResults)
     });
 
     const { data: moviesData, isLoading: isMoviesLoading } = useQuery({
         enabled: searchType === 'movies' && searchTerm.length > 0,
         queryKey: ['films', searchTerm],
-        queryFn: () => fetch(`/api/star-wars/films?title=${encodeURIComponent(searchTerm)}`).then(res => res.json()).then(data => data.result || data.results)
+        queryFn: () => fetch(`/api/star-wars/films?title=${encodeURIComponent(searchTerm)}`).then(normalizeResults)
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -82,45 +88,19 @@ export default function Home() {
                         {!searchTerm ? (
                             <div>Use the form to search for People or Movies.</div>
                         ) : searchType === 'people' ? (
-                            isPeopleLoading ? (
-                                <div>Searching...</div>
-                            ) : peopleData.length > 0 ? (
-                                <div className="space-y-4">
-                                    <div className="font-medium">Results</div>
-                                    <div className="divide-y">
-                                        {peopleData.map((person: { properties: { name: string } }, index: number) => (
-                                            <div key={index} className="flex items-center justify-between py-3">
-                                                <div className="font-medium">{person.properties.name}</div>
-                                                <Button variant="outline" size="sm">
-                                                    See Details
-                                                </Button>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div>No people found matching "{searchTerm}"</div>
-                            )
+                            <ResultsList
+                                isLoading={isPeopleLoading}
+                                results={peopleData}
+                                propertyKey="name"
+                                type="people"
+                            />
                         ) : (
-                            isMoviesLoading ? (
-                                <div>Searching...</div>
-                            ) : moviesData.length > 0 ? (
-                                <div className="space-y-4">
-                                    <div className="font-medium">Results</div>
-                                    <div className="divide-y">
-                                        {moviesData.map((movie: { properties: { title: string} }, index: number) => (
-                                            <div key={index} className="flex items-center justify-between py-3">
-                                                <div className="font-medium">{movie.properties.title}</div>
-                                                <Button variant="outline" size="sm">
-                                                    See Details
-                                                </Button>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div>No movies found matching "{searchTerm}"</div>
-                            )
+                            <ResultsList
+                                isLoading={isMoviesLoading}
+                                results={moviesData}
+                                propertyKey="title"
+                                type="movies"
+                            />
                         )}
                     </div>
                 </div>
