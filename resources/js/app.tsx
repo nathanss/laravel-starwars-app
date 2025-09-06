@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client';
 
 const queryClient = new QueryClient();
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'SWStarter';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
