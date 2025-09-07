@@ -67,11 +67,19 @@ export default function Home() {
                                     className="flex space-x-4"
                                 >
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="people" id="people" />
+                                        <RadioGroupItem
+                                            value="people"
+                                            id="people"
+                                            className="border-[#0094ff] data-[state=checked]:bg-[#0094ff] [&_svg]:fill-white"
+                                        />
                                         <Label htmlFor="people">People</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="movies" id="movies" />
+                                        <RadioGroupItem
+                                            value="movies"
+                                            id="movies"
+                                            className="border-[#0094ff] data-[state=checked]:bg-[#0094ff] [&_svg]:fill-white"
+                                        />
                                         <Label htmlFor="movies">Movies</Label>
                                     </div>
                                 </RadioGroup>
@@ -80,7 +88,7 @@ export default function Home() {
                                 <Input id="search" placeholder="e.g. Chewbacca, Yoda, Boba Fett" value={formInput} onChange={handleInputChange} />
                             </div>
                             <Button type="submit" disabled={!formInput} className="w-full">
-                                Search
+                                SEARCH
                             </Button>
                         </form>
                     </div>
