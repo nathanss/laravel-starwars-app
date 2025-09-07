@@ -1,13 +1,29 @@
-import { Head } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { router } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
-interface PersonProps {
-    person: any;
+interface Film {
+    title: string;
+    uid: string;
+    url: string;
 }
 
-export default function Person({ person }: PersonProps) {
+interface Person {
+    name: string;
+    birth_year: string;
+    gender: string;
+    eye_color: string;
+    hair_color: string;
+    height: string;
+    mass: string;
+    films: string[];
+}
 
+interface PersonProps {
+    person: Person;
+    films: Film[];
+}
+
+export default function Person({ person, films }: PersonProps) {
     if (!person) {
         return <div>Person not found</div>;
     }
@@ -16,44 +32,60 @@ export default function Person({ person }: PersonProps) {
         <>
             <Head title={`Person - ${person.name}`} />
             <div className="w-full">
-                <div className="flex items-start justify-center gap-[15px] bg-[#ededed] min-h-screen p-4">
+                <h1 className="w-full h-[25px] mb-[15px] text-2xl font-bold text-center">
+                    SWStarter
+                </h1>
+                <div className="flex min-h-screen items-start justify-center gap-[15px] bg-[#ededed] p-4">
                     <div className="w-2/3 rounded bg-white p-6 shadow">
-                        <Button
-                            variant="outline"
-                            onClick={() => router.visit('/')}
-                            className="mb-4"
-                        >
-                            ← Back to Search
-                        </Button>
+                        <h1 className="mb-4 text-2xl font-bold">{person.name}</h1>
 
-                        <h1 className="text-2xl font-bold mb-4">{person.name}</h1>
-
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="mb-8 grid grid-cols-2 gap-8">
                             <div>
-                                <h2 className="font-semibold">Height</h2>
-                                <p>{person.height} cm</p>
+                                <h2 className="text-xl font-semibold">Details</h2>
+                                <hr className="my-3" />
+                                <div className="flex flex-col gap-2">
+                                    <p>
+                                        <span className="font-medium">Birth Year:</span> {person.birth_year}
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Gender:</span> {person.gender}
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Eye Color:</span> {person.eye_color}
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Hair Color:</span> {person.hair_color}
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Height:</span> {person.height}
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Mass:</span> {person.mass}
+                                    </p>
+                                </div>
                             </div>
                             <div>
-                                <h2 className="font-semibold">Mass</h2>
-                                <p>{person.mass} kg</p>
-                            </div>
-                            <div>
-                                <h2 className="font-semibold">Hair Color</h2>
-                                <p>{person.hair_color}</p>
-                            </div>
-                            <div>
-                                <h2 className="font-semibold">Eye Color</h2>
-                                <p>{person.eye_color}</p>
-                            </div>
-                            <div>
-                                <h2 className="font-semibold">Birth Year</h2>
-                                <p>{person.birth_year}</p>
-                            </div>
-                            <div>
-                                <h2 className="font-semibold">Gender</h2>
-                                <p>{person.gender}</p>
+                                <h2 className="text-xl font-semibold">Movies</h2>
+                                <hr className="my-3" />
+                                <p>
+                                    {films.map((film, index) => (
+                                        <>
+                                            <Link
+                                                key={film.uid}
+                                                href={`/movie/${film.uid}`}
+                                                className="text-blue-600 hover:text-blue-800 hover:underline"
+                                            >
+                                                {film.title}
+                                            </Link>
+                                            {index < films.length - 1 && <span>, </span>}
+                                        </>
+                                    ))}
+                                </p>
                             </div>
                         </div>
+                        <Link href="/">
+                            <Button className="mb-4">BACK TO SEARCH</Button>
+                        </Link>
                     </div>
                 </div>
             </div>
