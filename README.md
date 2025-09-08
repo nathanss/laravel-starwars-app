@@ -1,4 +1,4 @@
-# Laravel LawnStarter App
+# Laravel Star Wars App
 
 ## Requirements
 
@@ -9,10 +9,6 @@
 ## Setup
 
 1. Clone the repository
-```bash
-git clone [repository-url]
-cd laravel-lawnstarter-app
-```
 
 2. Copy the environment file
 ```bash
