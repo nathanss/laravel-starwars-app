@@ -25,6 +25,21 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
+4. Install node dependencies
+```bash
+./vendor/bin/sail npm install
+```
+
+5. Generate application key:
+```bash
+./vendor/bin/sail artisan key:generate
+```
+
+6. Run database migrations:
+```bash
+./vendor/bin/sail artisan migrate
+```
+
 ## Running the Application
 
 You need to run the following commands in separate terminal windows:
@@ -58,18 +73,8 @@ You need to run the following commands in separate terminal windows:
 
 - Run E2E tests:
 ```bash
-./vendor/bin/sail run npx playwright install # run only once
+./vendor/bin/sail run npx playwright install chromium # run only once
 ./vendor/bin/sail npm run test:e2e
-```
-
-- Generate application key:
-```bash
-./vendor/bin/sail artisan key:generate
-```
-
-- Run database migrations:
-```bash
-./vendor/bin/sail artisan migrate
 ```
 
 ## Development
