@@ -17,33 +17,34 @@ interface ResultsListProps {
 
 export function ResultsList({ isLoading, results, propertyKey, type }: ResultsListProps) {
     if (isLoading) {
-        return <div>Searching...</div>;
+        return (
+            <div className="flex flex-1 items-center justify-center">
+                <p className="text-center font-bold text-[var(--pinkish-grey)]">Searching...</p>
+            </div>
+        );
     }
 
     if (!results || results.length === 0) {
         return (
-            <div>
-                There are zero matches.<br/>
-                Use the form to search for People or Movies.
+            <div className="flex flex-1 items-center justify-center">
+                <p className="text-center font-bold text-[var(--pinkish-grey)]">
+                    There are zero matches.
+                    <br />
+                    Use the form to search for People or Movies.
+                </p>
             </div>
         );
     }
 
     return (
         <div className="space-y-4">
-            <div className="font-medium">Results</div>
-            <div className="divide-y">
+            <div>
                 {results.map((result, index) => (
-                    <div key={index} className="flex items-center justify-between py-3">
-                        <div className="font-medium">{result.properties[propertyKey]}</div>
-                        <Link
-                            href={type === 'people' ? `/person/${result.uid}` : `/movie/${result.uid}`}
-                        >
-                            <Button
-                                variant="outline"
-                                size="sm"
-                            >
-                                See Details
+                    <div key={index} className="flex items-center justify-between py-3 border-b border-gray-200">
+                        <div className="font-bold">{result.properties[propertyKey]}</div>
+                        <Link href={type === 'people' ? `/person/${result.uid}` : `/movie/${result.uid}`}>
+                            <Button className="uppercase">
+                                See details
                             </Button>
                         </Link>
                     </div>

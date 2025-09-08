@@ -4,7 +4,7 @@ import * as LabelPrimitive from "@radix-ui/react-label"
 import { cn } from "@/lib/utils"
 
 function Label({
-  className,
+  className = 'text-base font-bold',
   ...props
 }: React.ComponentProps<typeof LabelPrimitive.Root>) {
   return (

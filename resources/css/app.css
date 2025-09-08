@@ -7,7 +7,7 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Montserrat', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
@@ -52,8 +52,17 @@
 
 :root {
     --emerald: #089954;
+    --black: #000000;
+    --white: #ffffff;
+    --dark-grey: #383838;
+    --grey-teal: #DADADA;
+    --grey-background: #EDEDED;
+    --pinkish-grey: #C4C4C4;
+    --warm-grey-75: rgba(132, 132, 132, 0.75);
+    --blue: #0094FF;
+    --green-teal: #0AB463;
     --radius: 0.625rem;
-    --background: oklch(1 0 0);
+    --background: var(--grey-background);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);

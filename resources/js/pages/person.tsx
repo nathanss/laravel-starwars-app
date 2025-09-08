@@ -1,3 +1,4 @@
+import { Bar } from '@/components/Bar';
 import { Button } from '@/components/ui/button';
 import { Head, Link } from '@inertiajs/react';
 
@@ -32,17 +33,14 @@ export default function Person({ person, films }: PersonProps) {
         <>
             <Head title={`Person - ${person.name}`} />
             <div className="w-full">
-                <h1 className="w-full h-[25px] mb-[15px] text-2xl font-bold text-center">
-                    SWStarter
-                </h1>
-                <div className="flex min-h-screen items-start justify-center gap-[15px] bg-[#ededed] p-4">
-                    <div className="w-2/3 rounded bg-white p-6 shadow">
-                        <h1 className="mb-4 text-2xl font-bold">{person.name}</h1>
-
+                <Bar text="SWStarter" />
+                <div className="flex min-h-screen items-start justify-center gap-8 bg-[var(--grey-background)] p-8">
+                    <div className="w-full md:w-2/3 rounded bg-white p-8 shadow">
+                        <h2 className="mb-8 text-2xl font-bold">{person.name}</h2>
                         <div className="mb-8 grid grid-cols-2 gap-8">
                             <div>
-                                <h2 className="text-xl font-semibold">Details</h2>
-                                <hr className="my-3" />
+                                <h3 className="text-xl font-semibold">Details</h3>
+                                <hr className="my-2" />
                                 <div className="flex flex-col gap-2">
                                     <p>
                                         <span className="font-medium">Birth Year:</span> {person.birth_year}
@@ -65,15 +63,15 @@ export default function Person({ person, films }: PersonProps) {
                                 </div>
                             </div>
                             <div>
-                                <h2 className="text-xl font-semibold">Movies</h2>
-                                <hr className="my-3" />
+                                <h3 className="text-xl font-semibold">Movies</h3>
+                                <hr className="my-2" />
                                 <p>
                                     {films.map((film, index) => (
                                         <>
                                             <Link
                                                 key={film.uid}
                                                 href={`/movie/${film.uid}`}
-                                                className="text-blue-600 hover:text-blue-800 hover:underline"
+                                                className="text-[var(--blue)] hover:underline"
                                             >
                                                 {film.title}
                                             </Link>
@@ -84,7 +82,7 @@ export default function Person({ person, films }: PersonProps) {
                             </div>
                         </div>
                         <Link href="/">
-                            <Button className="mb-4">BACK TO SEARCH</Button>
+                            <Button className="mb-4 uppercase">Back to search</Button>
                         </Link>
                     </div>
                 </div>

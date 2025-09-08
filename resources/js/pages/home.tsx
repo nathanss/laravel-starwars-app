@@ -6,6 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { ResultsList } from '@/components/ResultsList';
+import { Bar } from '@/components/Bar';
 
 
 
@@ -52,19 +53,17 @@ export default function Home() {
         <>
             <Head title="SWStarter" />
             <div className="w-full">
-                <h1 className="w-full h-[25px] mb-[15px] text-2xl font-bold text-center">
-                    SWStarter
-                </h1>
+                <Bar text="SWStarter" />
 
-                <div className="flex items-start justify-center gap-[15px] bg-[#ededed] min-h-[calc(100vh-40px)]">
-                    <div className="w-1/2 rounded bg-white p-4 shadow m-4">
+                <div className="flex flex-col md:flex-row items-start justify-center md:gap-8 bg-[var(--background)] min-h-[calc(100vh-40px)] p-8">
+                    <div className="w-full md:w-3/10 rounded bg-white p-8 shadow md:m-0">
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div className="space-y-2">
-                                <Label>What are you searching for?</Label>
+                                <Label className="mb-4 text-base">What are you searching for?</Label>
                                 <RadioGroup
                                     value={formType}
                                     onValueChange={handleTypeChange}
-                                    className="flex space-x-4"
+                                    className="flex flex-wrap gap-4"
                                 >
                                     <div className="flex items-center space-x-2">
                                         <RadioGroupItem
@@ -85,16 +84,20 @@ export default function Home() {
                                 </RadioGroup>
                             </div>
                             <div className="space-y-2">
-                                <Input id="search" placeholder="e.g. Chewbacca, Yoda, Boba Fett" value={formInput} onChange={handleInputChange} />
+                                <Input  id="search" placeholder="e.g. Chewbacca, Yoda, Boba Fett" value={formInput} onChange={handleInputChange} />
                             </div>
-                            <Button type="submit" disabled={!formInput} className="w-full">
-                                SEARCH
+                            <Button className="w-full" type="submit" disabled={!formInput}>
+                                Search
                             </Button>
                         </form>
                     </div>
-                    <div className="w-1/2 rounded bg-white p-4 shadow m-4">
+                    <div className="w-full md:w-4/10 h-96 min-h-8 rounded bg-white p-8 shadow md:m-0 flex flex-col">
+                        <h2 className="text-xl font-bold">Results</h2>
+                        <hr className="my-2" />
                         {!searchTerm ? (
-                            <div>Use the form to search for People or Movies.</div>
+                            <div className="flex-1 flex items-center justify-center">
+                                <p className="text-center font-bold text-[var(--pinkish-grey)]">There are zero matches.<br/>Use the form to search for People or Movies.</p>
+                            </div>
                         ) : searchType === 'people' ? (
                             <ResultsList
                                 isLoading={isPeopleLoading}
