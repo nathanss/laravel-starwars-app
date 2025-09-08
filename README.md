@@ -55,9 +55,15 @@ You need to run the following commands in separate terminal windows:
 
 ## Additional Commands
 
-- Run tests:
+- Run unit tests:
 ```bash
 ./vendor/bin/sail artisan test
+```
+
+- Run E2E tests:
+```bash
+./vendor/bin/sail run npx playwright install # run only once
+./vendor/bin/sail npm run test:e2e
 ```
 
 - Generate application key:

@@ -34,7 +34,7 @@ export default function Movie({ movie, characters }: MovieProps) {
                 <Bar text="SWStarter" />
                 <div className="flex min-h-screen items-start justify-center gap-8 bg-[var(--grey-background)] p-8">
                     <div className="w-full md:w-2/3 rounded bg-white p-8 shadow">
-                        <h1 className="mb-8 text-2xl font-bold">{movie.title} (Episode {movie.episode_id})</h1>
+                        <h2 className="mb-8 text-2xl font-bold">{movie.title} (Episode {movie.episode_id})</h2>
 
                         <div className="mb-8 grid grid-cols-2 gap-8">
                             <div>
