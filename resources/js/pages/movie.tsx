@@ -2,20 +2,13 @@ import { Head } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
 import { Bar } from '@/components/Bar';
+import type { Movie } from '@/types';
 
 interface Character {
     name: string;
     uid: string;
 }
 
-interface Movie {
-    title: string;
-    episode_id: number;
-    opening_crawl: string;
-    director: string;
-    producer: string;
-    release_date: string;
-}
 
 interface MovieProps {
     movie: Movie;

@@ -1,12 +1,7 @@
 import { Button } from '@/components/ui/button';
+import { Result } from '@/types';
 import { Link } from '@inertiajs/react';
 
-interface Result {
-    uid?: string;
-    properties: {
-        [key: string]: string;
-    };
-}
 
 interface ResultsListProps {
     isLoading: boolean;

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { ResultsList } from '@/components/ResultsList';
 import { Bar } from '@/components/Bar';
+import { Result } from '@/types';
 
 
 
@@ -16,9 +17,9 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchType, setSearchType] = useState('people');
 
-    const normalizeResults = async (res: Response) => {
+    const normalizeResults = async (res: Response): Promise<Result[]> => {
         const json = await res.json();
-        return json.result || json.results;
+        return json.result;
     }
 
     const { data: peopleData, isLoading: isPeopleLoading } = useQuery({
@@ -99,7 +100,7 @@ export default function Home() {
                             </Button>
                         </form>
                     </div>
-                    <div className="w-full md:w-4/10 h-96 min-h-8 rounded bg-white p-8 shadow md:m-0 flex flex-col">
+                    <div className="w-full md:w-4/10 min-h-96 rounded bg-white p-8 shadow md:m-0 flex flex-col">
                         <h2 className="text-xl font-bold">Results</h2>
                         <hr className="my-2" />
                         {!searchTerm ? (

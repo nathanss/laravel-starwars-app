@@ -1,5 +1,6 @@
 import { Bar } from '@/components/Bar';
 import { Button } from '@/components/ui/button';
+import type { Person } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 
 interface Film {
@@ -8,16 +9,6 @@ interface Film {
     url: string;
 }
 
-interface Person {
-    name: string;
-    birth_year: string;
-    gender: string;
-    eye_color: string;
-    hair_color: string;
-    height: string;
-    mass: string;
-    films: string[];
-}
 
 interface PersonProps {
     person: Person;
