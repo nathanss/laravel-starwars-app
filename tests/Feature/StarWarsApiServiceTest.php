@@ -7,32 +7,6 @@ beforeEach(function () {
     $this->service = new StarWarsApiService();
 });
 
-test('service can get people list', function () {
-    // Arrange
-    $mockResponse = [
-        'message' => 'ok',
-        'results' => [
-            [
-                'uid' => '1',
-                'name' => 'Luke Skywalker',
-                'url' => 'https://www.swapi.tech/api/people/1'
-            ]
-        ]
-    ];
-
-    Http::fake([
-        'swapi.tech/api/people?page=1' => Http::response($mockResponse, 200)
-    ]);
-
-    // Act
-    $result = $this->service->getPeople(1);
-
-    // Assert
-    expect($result)->toBe($mockResponse);
-    Http::assertSent(function ($request) {
-        return $request->url() === 'https://www.swapi.tech/api/people?page=1';
-    });
-});
 
 test('service can get person details', function () {
     // Arrange

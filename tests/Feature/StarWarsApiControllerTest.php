@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\StarWarsController;
+use App\Http\Controllers\Api\StarWarsApiController;
 use App\Services\StarWarsApiService;
 use Illuminate\Http\Request;
 
 beforeEach(function () {
     $this->mockService = mock(StarWarsApiService::class);
-    $this->controller = new StarWarsController($this->mockService);
+    $this->controller = new StarWarsApiController($this->mockService);
 });
 
 test('controller can get people with query parameters', function () {
