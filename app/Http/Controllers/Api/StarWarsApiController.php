@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\QueryExecuted;
 use App\Http\Controllers\Controller;
 use App\Services\StarWars\StarWarsApiClient;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +23,7 @@ class StarWarsApiController extends Controller
         $result = $this->starWarsService->getPeople($request->query());
         $executionTime = microtime(true) - $start;
 
-        event(new \App\Events\QueryExecuted('getPeople', $executionTime));
+        event(new QueryExecuted('getPeople', $executionTime));
         return response()->json($result);
     }
 
@@ -32,7 +33,7 @@ class StarWarsApiController extends Controller
         $result = $this->starWarsService->getPerson($id);
         $executionTime = microtime(true) - $start;
 
-        event(new \App\Events\QueryExecuted("getPerson/$id", $executionTime));
+        event(new QueryExecuted("getPerson/$id", $executionTime));
         return response()->json($result);
     }
 
@@ -42,7 +43,7 @@ class StarWarsApiController extends Controller
         $result = $this->starWarsService->getFilms($request->query());
         $executionTime = microtime(true) - $start;
 
-        event(new \App\Events\QueryExecuted('getFilms', $executionTime));
+        event(new QueryExecuted('getFilms', $executionTime));
         return response()->json($result);
     }
 
@@ -52,7 +53,7 @@ class StarWarsApiController extends Controller
         $result = $this->starWarsService->getFilm($id);
         $executionTime = microtime(true) - $start;
 
-        event(new \App\Events\QueryExecuted("getFilm/$id", $executionTime));
+        event(new QueryExecuted("getFilm/$id", $executionTime));
         return response()->json($result);
     }
 }
