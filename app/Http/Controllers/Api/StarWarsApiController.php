@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\StarWarsApiService;
+use App\Services\StarWars\StarWarsApiClient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class StarWarsApiController extends Controller
 {
     protected $starWarsService;
 
-    public function __construct(StarWarsApiService $starWarsService)
+    public function __construct(StarWarsApiClient $starWarsService)
     {
         $this->starWarsService = $starWarsService;
     }

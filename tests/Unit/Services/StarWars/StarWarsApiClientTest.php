@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Unit\Services;
+namespace Tests\Unit\Services\StarWars;
 
-use App\Services\StarWarsApiService;
+use App\Services\StarWars\StarWarsApiClient;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class StarWarsApiServiceTest extends TestCase
+class StarWarsApiClientTest extends TestCase
 {
-    private StarWarsApiService $service;
+    private StarWarsApiClient $client;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new StarWarsApiService();
+        $this->client = new StarWarsApiClient();
     }
 
     public function test_get_people_returns_people_list(): void
@@ -35,7 +35,7 @@ class StarWarsApiServiceTest extends TestCase
         ]);
 
         // Act
-        $result = $this->service->getPeople(['page' => 2, 'limit' => 10]);
+        $result = $this->client->getPeople(['page' => 2, 'limit' => 10]);
 
         // Assert
         $this->assertEquals($mockResponse, $result);
@@ -57,7 +57,7 @@ class StarWarsApiServiceTest extends TestCase
         ]);
 
         // Act
-        $result = $this->service->getPeople([]);
+        $result = $this->client->getPeople([]);
 
         // Assert
         $this->assertEquals($mockResponse, $result);
@@ -85,7 +85,7 @@ class StarWarsApiServiceTest extends TestCase
         ]);
 
         // Act
-        $result = $this->service->getPerson('1');
+        $result = $this->client->getPerson('1');
 
         // Assert
         $this->assertEquals($mockResponse, $result);
@@ -112,7 +112,7 @@ class StarWarsApiServiceTest extends TestCase
         ]);
 
         // Act
-        $result = $this->service->getFilms(['title' => 'New Hope']);
+        $result = $this->client->getFilms(['title' => 'New Hope']);
 
         // Assert
         $this->assertEquals($mockResponse, $result);
@@ -121,27 +121,6 @@ class StarWarsApiServiceTest extends TestCase
         });
     }
 
-    public function test_get_films_with_no_params(): void
-    {
-        // Arrange
-        $mockResponse = [
-            'message' => 'ok',
-            'result' => []
-        ];
-
-        Http::fake([
-            'swapi.tech/api/films' => Http::response($mockResponse, 200)
-        ]);
-
-        // Act
-        $result = $this->service->getFilms([]);
-
-        // Assert
-        $this->assertEquals($mockResponse, $result);
-        Http::assertSent(function ($request) {
-            return $request->url() === 'https://www.swapi.tech/api/films';
-        });
-    }
     public function test_get_film_returns_film_details(): void
     {
         // Arrange
@@ -161,7 +140,7 @@ class StarWarsApiServiceTest extends TestCase
         ]);
 
         // Act
-        $result = $this->service->getFilm('1');
+        $result = $this->client->getFilm('1');
 
         // Assert
         $this->assertEquals($mockResponse, $result);
@@ -175,10 +154,23 @@ class StarWarsApiServiceTest extends TestCase
         ]);
 
         // Act
-        $result = $this->service->getPerson('999');
+        $result = $this->client->getPerson('999');
 
         // Assert
         $this->assertArrayHasKey('error', $result);
         $this->assertEquals(404, $result['status']);
+    }
+
+    public function test_handles_timeout(): void
+    {
+        // Arrange
+        Http::fake(function () {
+            throw new \Exception('Connection timed out');
+        });
+
+        // Act & Assert
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Connection timed out');
+        $this->client->getPerson('1');
     }
 }

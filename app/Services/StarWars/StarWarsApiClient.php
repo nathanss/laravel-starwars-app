@@ -10,6 +10,27 @@ class StarWarsApiClient
 {
     protected string $baseUrl = 'https://www.swapi.tech/api';
 
+    public function getPeople(array $params = []): array
+    {
+        $params = array_merge(['page' => 1], $params);
+        return $this->get('people', $params);
+    }
+
+    public function getPerson(string $id): array
+    {
+        return $this->get("people/{$id}");
+    }
+
+    public function getFilms(array $params = []): array
+    {
+        return $this->get('films', $params);
+    }
+
+    public function getFilm(string $id): array
+    {
+        return $this->get("films/{$id}");
+    }
+
     public function get(string $endpoint, array $params = []): array
     {
         try {

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Controllers\Api;
 
 use App\Http\Controllers\Api\StarWarsApiController;
-use App\Services\StarWarsApiService;
+use App\Services\StarWars\StarWarsApiClient;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use Mockery;
@@ -16,7 +16,7 @@ class StarWarsApiControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->mockService = Mockery::mock(StarWarsApiService::class);
+        $this->mockService = Mockery::mock(StarWarsApiClient::class);
         $this->controller = new StarWarsApiController($this->mockService);
     }
 
