@@ -25,19 +25,19 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-4. Install node dependencies
+4. Start the Docker containers:
+```bash
+./vendor/bin/sail up
+```
+
+5. Install node dependencies
 ```bash
 ./vendor/bin/sail npm install
 ```
 
-5. Generate application key:
+6. Generate application key:
 ```bash
 ./vendor/bin/sail artisan key:generate
-```
-
-6. Run database migrations:
-```bash
-./vendor/bin/sail artisan migrate
 ```
 
 ## Running the Application
