@@ -84,7 +84,15 @@ export default function Home() {
                                 </RadioGroup>
                             </div>
                             <div className="space-y-2">
-                                <Input  id="search" placeholder="e.g. Chewbacca, Yoda, Boba Fett" value={formInput} onChange={handleInputChange} />
+                                <Input
+                                    id="search"
+                                    placeholder={formType === 'people'
+                                        ? "e.g. Chewbacca, Yoda, Boba Fett"
+                                        : "e.g. A New Hope, Empire Strikes Back"
+                                    }
+                                    value={formInput}
+                                    onChange={handleInputChange}
+                                />
                             </div>
                             <Button className="w-full" type="submit" disabled={!formInput}>
                                 Search
