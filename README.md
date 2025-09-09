@@ -3,8 +3,6 @@
 ## Requirements
 
 - Docker (Docker Desktop on macOS/Windows, Docker Engine on Linux)
-- Docker Compose
-- Git
 
 ## Setup
 
