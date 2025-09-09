@@ -54,12 +54,17 @@ You need to run the following commands in separate terminal windows:
 ./vendor/bin/sail npm run dev
 ```
 
-3. Start the Laravel queue worker:
+3. Run migrations
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+4. Start the Laravel queue worker:
 ```bash
 ./vendor/bin/sail artisan queue:work
 ```
 
-4. Start the Laravel scheduler:
+5. Start the Laravel scheduler:
 ```bash
 ./vendor/bin/sail artisan schedule:work
 ```
