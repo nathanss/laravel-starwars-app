@@ -7,9 +7,12 @@ use App\Services\StarWars\StarWarsApiClient;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use Mockery;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StarWarsApiControllerTest extends TestCase
 {
+    use RefreshDatabase;
+    
     private StarWarsApiController $controller;
     private $mockService;
 
