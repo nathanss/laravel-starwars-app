@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Result } from '@/types';
 import { Link } from '@inertiajs/react';
-
+import { CenteredText } from './CenteredText';
 
 interface ResultsListProps {
     isLoading: boolean;
@@ -21,13 +21,11 @@ export function ResultsList({ isLoading, results, propertyKey, type }: ResultsLi
 
     if (!results || results.length === 0) {
         return (
-            <div className="flex flex-1 items-center justify-center">
-                <p className="text-center font-bold text-[var(--pinkish-grey)]">
-                    There are zero matches.
-                    <br />
-                    Use the form to search for People or Movies.
-                </p>
-            </div>
+            <CenteredText>
+                There are zero matches.
+                <br />
+                Use the form to search for People or Movies.
+            </CenteredText>
         );
     }
 
@@ -35,12 +33,10 @@ export function ResultsList({ isLoading, results, propertyKey, type }: ResultsLi
         <div className="space-y-4">
             <div>
                 {results.map((result, index) => (
-                    <div key={index} className="flex items-center justify-between py-3 border-b border-gray-200">
+                    <div key={index} className="flex items-center justify-between border-b border-gray-200 py-3">
                         <div className="font-bold">{result.properties[propertyKey]}</div>
                         <Link href={type === 'people' ? `/person/${result.uid}` : `/movie/${result.uid}`}>
-                            <Button className="uppercase">
-                                See details
-                            </Button>
+                            <Button className="uppercase">See details</Button>
                         </Link>
                     </div>
                 ))}
