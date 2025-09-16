@@ -65,7 +65,7 @@ export default function Home() {
                                         <RadioGroupItem
                                             value="people"
                                             id="people"
-                                            className="border-[#0094ff] data-[state=checked]:bg-[#0094ff] [&_svg]:fill-white"
+                                            className="border-[var(--blue)] data-[state=checked]:bg-[var(--blue)] [&_svg]:fill-white"
                                         />
                                         <Label htmlFor="people">People</Label>
                                     </div>
@@ -73,7 +73,7 @@ export default function Home() {
                                         <RadioGroupItem
                                             value="movies"
                                             id="movies"
-                                            className="border-[#0094ff] data-[state=checked]:bg-[#0094ff] [&_svg]:fill-white"
+                                            className="border-[var(--blue)] data-[state=checked]:bg-[var(--blue)] [&_svg]:fill-white"
                                         />
                                         <Label htmlFor="movies">Movies</Label>
                                     </div>
