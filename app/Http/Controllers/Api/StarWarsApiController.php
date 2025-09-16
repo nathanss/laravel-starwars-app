@@ -10,17 +10,17 @@ use Illuminate\Http\Request;
 
 class StarWarsApiController extends Controller
 {
-    protected $starWarsService;
+    protected $starWarsApiClient;
 
-    public function __construct(StarWarsApiClient $starWarsService)
+    public function __construct(StarWarsApiClient $starWarsApiClient)
     {
-        $this->starWarsService = $starWarsService;
+        $this->starWarsApiClient = $starWarsApiClient;
     }
 
     public function getPeople(Request $request): JsonResponse
     {
         $start = microtime(true);
-        $result = $this->starWarsService->getPeople($request->query());
+        $result = $this->starWarsApiClient->getPeople($request->query());
         $executionTime = microtime(true) - $start;
 
         event(new QueryExecuted('getPeople', $executionTime));
@@ -30,7 +30,7 @@ class StarWarsApiController extends Controller
     public function getPerson(string $id): JsonResponse
     {
         $start = microtime(true);
-        $result = $this->starWarsService->getPerson($id);
+        $result = $this->starWarsApiClient->getPerson($id);
         $executionTime = microtime(true) - $start;
 
         event(new QueryExecuted("getPerson/$id", $executionTime));
@@ -40,7 +40,7 @@ class StarWarsApiController extends Controller
     public function getFilms(Request $request): JsonResponse
     {
         $start = microtime(true);
-        $result = $this->starWarsService->getFilms($request->query());
+        $result = $this->starWarsApiClient->getFilms($request->query());
         $executionTime = microtime(true) - $start;
 
         event(new QueryExecuted('getFilms', $executionTime));
@@ -50,7 +50,7 @@ class StarWarsApiController extends Controller
     public function getFilm(string $id): JsonResponse
     {
         $start = microtime(true);
-        $result = $this->starWarsService->getFilm($id);
+        $result = $this->starWarsApiClient->getFilm($id);
         $executionTime = microtime(true) - $start;
 
         event(new QueryExecuted("getFilm/$id", $executionTime));
