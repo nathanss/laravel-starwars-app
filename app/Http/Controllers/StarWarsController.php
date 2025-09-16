@@ -17,12 +17,6 @@ class StarWarsController extends Controller
     {
         try {
             $data = $this->starWarsService->getPersonWithFilms($id);
-
-            if (isset($data['error'])) {
-                // Flash error message but still show the page with error state
-                session()->flash('error', $data['error']);
-            }
-
             return Inertia::render('person', $data);
         } catch (\Exception $e) {
             Log::error("Controller error showing person {$id}: " . $e->getMessage());
@@ -34,11 +28,6 @@ class StarWarsController extends Controller
     {
         try {
             $data = $this->starWarsService->getFilmWithCharacters($id);
-
-            if (isset($data['error'])) {
-                session()->flash('error', $data['error']);
-            }
-
             return Inertia::render('movie', $data);
         } catch (\Exception $e) {
             Log::error("Controller error showing film {$id}: " . $e->getMessage());
