@@ -55,7 +55,7 @@ export default function Home() {
             <div className="w-full">
                 <Bar text="SWStarter" />
 
-                <div className="flex min-h-[calc(100vh-40px)] flex-col items-start justify-center bg-[var(--background)] p-8 md:flex-row md:gap-8">
+                <div className="flex min-h-[calc(100vh-40px)] flex-col items-start justify-center bg-[var(--background)] p-8 md:flex-row gap-8">
                     <div className="w-full rounded bg-white p-8 shadow md:m-0 md:w-3/10">
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div className="space-y-2">
